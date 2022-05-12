@@ -1,5 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import Routes from '../constants/routes';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,11 +10,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const Main = () => {
+const Main = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text>Hello there!</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{marginBottom: 8}}>Looks like you haven't configured your API Key yet!</Text>
+      <Button
+        title="Binance API Key Setup"
+        onPress={() => navigation.navigate(Routes.APIKeySetup)}
+      />
     </View>
   );
 }
