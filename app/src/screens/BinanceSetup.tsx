@@ -4,6 +4,7 @@ import { Text, TextInput, View, Button } from 'react-native';
 const BinanceSetup = () => {
     const [apiKey, setApiKey] = React.useState('');
     const [apiSecret, setApiSecret] = React.useState('');
+    const [error, setError] = React.useState('');
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', marginHorizontal: 48 }}>
@@ -37,7 +38,14 @@ const BinanceSetup = () => {
                 />
 
                 <View style={{ marginTop: 16 }}>
-                    <Button title='Update Connection'></Button>
+                    {!!error && <Text style={{ color: 'red', marginBottom: 8, fontSize: 12 }}>{error}</Text>}
+                    <Button
+                        title='Update Connection'
+                        onPress={() => {
+                            if (!apiKey) setError('Please provide the API Key.')
+                            else if (!apiSecret) setError('Please provide the API Secret.')
+                        }}
+                    />
                 </View>
             </View>
         </View>
