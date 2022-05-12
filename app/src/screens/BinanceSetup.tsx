@@ -20,7 +20,10 @@ const BinanceSetup = () => {
                 <Text style={{ fontSize: 12, textTransform: 'uppercase' }}>API Key</Text>
                 <TextInput
                     style={{ borderWidth: 1, marginTop: 8, paddingHorizontal: 8 }}
-                    onChangeText={setApiKey}
+                    onChangeText={(value) => {
+                        setError('');
+                        setApiKey(value);
+                    }}
                     value={apiKey}
                     multiline
                     numberOfLines={4}
@@ -30,7 +33,10 @@ const BinanceSetup = () => {
                 <Text style={{ fontSize: 12, textTransform: 'uppercase', marginTop: 16 }}>API Secret</Text>
                 <TextInput
                     style={{ borderWidth: 1, marginTop: 8, paddingHorizontal: 8 }}
-                    onChangeText={setApiSecret}
+                    onChangeText={(value) => {
+                        setError('');
+                        setApiSecret(value);
+                    }}
                     value={apiSecret}
                     multiline
                     numberOfLines={4}
