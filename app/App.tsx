@@ -4,18 +4,30 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Main from './src/screens/Main';
 import BinanceSetup from './src/screens/BinanceSetup';
-import Routes, { PageTitles } from './src/constants/routes';
+import Routes from './src/constants/routes';
 
 const Stack = createNativeStackNavigator();
 
-
+const Pages = [
+    {
+        route: Routes.Home,
+        title: 'Portfolio',
+        component: Main,
+    },
+    {
+        route: Routes.APIKeySetup,
+        title: 'Binance API Key Setup',
+        component: BinanceSetup,
+    },
+];
 
 const App = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName={Routes.Home}>
-                <Stack.Screen name={Routes.Home} component={Main} options={{ title: PageTitles.Home }} />
-                <Stack.Screen name={Routes.APIKeySetup} component={BinanceSetup} options={{ title: PageTitles.APIKeySetup }} />
+                {Pages.map(({route, title, component}) => (
+                    <Stack.Screen key={route} name={route} component={component} options={{ title: title }} />
+                ))}
             </Stack.Navigator>
         </NavigationContainer>
     );
