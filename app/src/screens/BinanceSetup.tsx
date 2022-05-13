@@ -11,6 +11,18 @@ const BinanceSetup = () => {
     const [apiSecret, setApiSecret] = React.useState('');
     const [statusData, setStatusData] = React.useState(InitialStatus);
 
+    React.useEffect(() => {
+        setStatusData({ status: Status.MESSAGE, message: 'Loading configuration...' });
+
+        getKey(EncryptedStorageKeys.BINANCE_API_KEY_OBJECT).then((binanceApiKey?: any | null) => {
+            if (binanceApiKey) {
+                setApiKey(binanceApiKey[EncryptedStorageKeys.BINANCE_API_KEY]);
+                setApiSecret(binanceApiKey[EncryptedStorageKeys.BINANCE_API_SECRET]);
+            }
+            setStatusData(InitialStatus);
+        });
+    }, []);
+
     return (
         <View style={{ flex: 1, justifyContent: 'center', marginHorizontal: 48 }}>
             <View>
@@ -22,6 +34,7 @@ const BinanceSetup = () => {
             </View>
 
             <View style={{  marginVertical: 40 }}>
+                <StatusControl statusData={statusData} styles={{ marginBottom: 8, textAlign: 'center' }} />
                 <Text style={{ fontSize: 12, textTransform: 'uppercase' }}>API Key</Text>
                 <TextInput
                     style={{ borderWidth: 1, marginTop: 8, paddingHorizontal: 8 }}
@@ -49,7 +62,6 @@ const BinanceSetup = () => {
                 />
 
                 <View style={{ marginTop: 16 }}>
-                    <StatusControl statusData={statusData} styles={{ marginBottom: 8 }} />
                     <Button
                         title='Update Connection'
                         onPress={async () => {
