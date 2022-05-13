@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text, TextInput, View, Button } from 'react-native';
 
-import { getKey, storeKey } from '../utils/encrypted_storage_utils';
-import StatusControl from '../components/StatusControl';
-import { Status, InitialStatus } from '../components/StatusControl/constants';
-import { EncryptedStorageKeys } from '../constants'
+import { getKey, storeKey } from '../../utils/encryptedStorageUtils';
+import StatusControl from '../../components/StatusControl';
+import { Status, InitialStatus } from '../../components/StatusControl/constants';
+import { EncryptedStorageKeys } from '../../constants'
 
 const BinanceSetup = () => {
     const [apiKey, setApiKey] = React.useState('');
@@ -31,7 +31,7 @@ const BinanceSetup = () => {
     }, []);
 
     return (
-        <View style={{ flex: 1, justifyContent: 'center', marginHorizontal: 48 }}>
+        <View style={{ flex: 1, marginHorizontal: 48, marginTop: 40 }}>
             <View>
                 <Text style={{ fontSize: 16, fontWeight: 'bold' }}>
                     Please create an API Key from Binance, and provide here.
