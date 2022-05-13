@@ -1,6 +1,4 @@
-const Routes = {
-  Home: 'Home',
-  APIKeySetup: 'BinanceAPIKeySetup',
+export type RootStackParamList = {
+  Home: undefined;
+  APIKeySetup: undefined;
 };
-
-export default Routes;
