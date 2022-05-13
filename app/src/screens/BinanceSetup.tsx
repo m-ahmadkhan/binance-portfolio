@@ -63,15 +63,19 @@ const BinanceSetup = () => {
                 <View style={{ marginTop: 16 }}>
                     <Button
                         title='Update Connection'
-                        onPress={async () => {
+                        onPress={() => {
                             if (!apiKey) setStatusData({status: Status.ERROR, message: 'Please provide the API Key.'});
                             else if (!apiSecret) setStatusData({status: Status.ERROR, message: 'Please provide the API Secret.'});
                             else {
-                                await storeKey(EncryptedStorageKeys.BINANCE_API_KEY_OBJECT, {
+                                storeKey(EncryptedStorageKeys.BINANCE_API_KEY_OBJECT, {
                                     [EncryptedStorageKeys.BINANCE_API_KEY]: apiKey,
                                     [EncryptedStorageKeys.BINANCE_API_SECRET]: apiSecret,
+                                }).then(() => {
+                                    setStatusData({
+                                        status: Status.SUCCESS,
+                                        message: 'Connection successfully updated.',
+                                    });
                                 });
-                                setStatusData({status: Status.SUCCESS, message: 'Connection successfully updated.'});
                             }
                         }}
                     />
