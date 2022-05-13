@@ -26,7 +26,9 @@ const BinanceSetup = () => {
     return (
         <View style={{ flex: 1, justifyContent: 'center', marginHorizontal: 48 }}>
             <View>
-                <Text style={{ fontSize: 16 }}>Please create an API Key from Binance, and provide here.</Text>
+                <Text style={{ fontSize: 16, fontWeight: 'bold' }}>
+                    Please create an API Key from Binance, and provide here.
+                </Text>
                 <Text style={{ fontSize: 14, marginTop: 8 }}>
                     Important! Make sure to only select the read permission.
                     We don't accept API keys that exceed this permission.
@@ -37,28 +39,25 @@ const BinanceSetup = () => {
                 <StatusControl statusData={statusData} styles={{ marginBottom: 8, textAlign: 'center' }} />
                 <Text style={{ fontSize: 12, textTransform: 'uppercase' }}>API Key</Text>
                 <TextInput
-                    style={{ borderWidth: 1, marginTop: 8, paddingHorizontal: 8 }}
+                    value={apiKey}
+                    placeholder="API Key"
+                    style={{ borderWidth: 1, marginTop: 8, paddingHorizontal: 8, height: 56 }}
                     onChangeText={(value) => {
                         setStatusData(InitialStatus);
                         setApiKey(value);
                     }}
-                    value={apiKey}
-                    multiline
-                    numberOfLines={4}
-                    placeholder="API Key"
                 />
 
                 <Text style={{ fontSize: 12, textTransform: 'uppercase', marginTop: 16 }}>API Secret</Text>
                 <TextInput
-                    style={{ borderWidth: 1, marginTop: 8, paddingHorizontal: 8 }}
+                    secureTextEntry
+                    placeholder="API Secret"
+                    value={apiSecret}
+                    style={{ borderWidth: 1, marginTop: 8, paddingHorizontal: 8, height: 56 }}
                     onChangeText={(value) => {
                         setStatusData(InitialStatus);
                         setApiSecret(value);
                     }}
-                    value={apiSecret}
-                    multiline
-                    numberOfLines={4}
-                    placeholder="API Secret"
                 />
 
                 <View style={{ marginTop: 16 }}>
