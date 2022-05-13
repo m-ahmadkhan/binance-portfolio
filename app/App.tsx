@@ -16,7 +16,7 @@ const Pages = [
     },
     {
         route: Routes.APIKeySetup,
-        title: 'Binance API Key Setup',
+        title: 'Add Binance Connection',
         component: BinanceSetup,
     },
 ];
