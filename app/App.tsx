@@ -2,9 +2,9 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Main from './src/screens/Main';
-import BinanceSetup from './src/screens/BinanceSetup';
-import Routes from './src/constants/routes';
+import Main from 'screens/Main';
+import BinanceSetup from 'screens/BinanceSetup';
+import Routes from 'constants/routes';
 
 const Stack = createNativeStackNavigator();
 

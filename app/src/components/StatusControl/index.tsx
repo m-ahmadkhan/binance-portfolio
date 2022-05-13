@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { Status } from './constants'
+
+import { Status } from 'constants/index'
 
 const StatusControl = ({ statusData, styles }: { statusData: { status?: string; message?: string }; styles?: Object }) => {
     const textColor = {

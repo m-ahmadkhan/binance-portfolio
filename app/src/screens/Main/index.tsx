@@ -1,9 +1,9 @@
 import React from 'react';
 import { Text, View, Button } from 'react-native';
 
-import Routes from '../../constants/routes';
-import { getKey } from '../../utils/encryptedStorageUtils';
-import { EncryptedStorageKeys } from '../../constants'
+import Routes from 'constants/routes';
+import { getKey } from 'utils/encryptedStorageUtils';
+import { EncryptedStorageKeys } from 'constants/index'
 
 const NoConnection = ({ navigation }) => (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

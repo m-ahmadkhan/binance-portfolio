@@ -1,10 +1,9 @@
 import React from 'react';
 import { Text, TextInput, View, Button } from 'react-native';
 
-import { getKey, storeKey } from '../../utils/encryptedStorageUtils';
-import StatusControl from '../../components/StatusControl';
-import { Status, InitialStatus } from '../../components/StatusControl/constants';
-import { EncryptedStorageKeys } from '../../constants'
+import { getKey, storeKey } from 'utils/encryptedStorageUtils';
+import StatusControl from 'components/StatusControl';
+import { EncryptedStorageKeys, Status, InitialStatus } from 'constants/index'
 
 const BinanceSetup = () => {
     const [apiKey, setApiKey] = React.useState('');
