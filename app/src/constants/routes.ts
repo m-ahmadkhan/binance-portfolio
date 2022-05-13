@@ -1,6 +1,6 @@
 const Routes = {
-    Home: 'Home',
-    APIKeySetup: 'BinanceAPIKeySetup',
+  Home: 'Home',
+  APIKeySetup: 'BinanceAPIKeySetup',
 };
 
 export default Routes;

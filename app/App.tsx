@@ -9,28 +9,28 @@ import Routes from 'constants/routes';
 const Stack = createNativeStackNavigator();
 
 const Pages = [
-    {
-        route: Routes.Home,
-        title: 'Portfolio',
-        component: Main,
-    },
-    {
-        route: Routes.APIKeySetup,
-        title: 'Add Binance Connection',
-        component: BinanceSetup,
-    },
+  {
+    route: Routes.Home,
+    title: 'Portfolio',
+    component: Main,
+  },
+  {
+    route: Routes.APIKeySetup,
+    title: 'Add Binance Connection',
+    component: BinanceSetup,
+  },
 ];
 
 const App = () => {
-    return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName={Routes.Home}>
-                {Pages.map(({route, title, component}) => (
-                    <Stack.Screen key={route} name={route} component={component} options={{ title: title }} />
-                ))}
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName={Routes.Home}>
+        {Pages.map(({ route, title, component }) => (
+          <Stack.Screen key={route} name={route} component={component} options={{ title: title }} />
+        ))}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 };
 
 export default App;
