@@ -14,12 +14,19 @@ const BinanceSetup = () => {
     React.useEffect(() => {
         setStatusData({ status: Status.MESSAGE, message: 'Loading configuration...' });
 
-        getKey(EncryptedStorageKeys.BINANCE_API_KEY_OBJECT).then((binanceApiKey?: any | null) => {
+        getKey(
+            EncryptedStorageKeys.BINANCE_API_KEY_OBJECT
+        ).then((binanceApiKey?: any | null) => {
             if (binanceApiKey) {
                 setApiKey(binanceApiKey[EncryptedStorageKeys.BINANCE_API_KEY]);
                 setApiSecret(binanceApiKey[EncryptedStorageKeys.BINANCE_API_SECRET]);
             }
             setStatusData(InitialStatus);
+        }).catch(() => {
+            setStatusData({
+                status: Status.ERROR,
+                message: 'Some error occurred while fetching the connection info.'
+            });
         });
     }, []);
 
@@ -74,6 +81,11 @@ const BinanceSetup = () => {
                                     setStatusData({
                                         status: Status.SUCCESS,
                                         message: 'Connection updated successfully.',
+                                    });
+                                }).catch(() => {
+                                    setStatusData({
+                                        status: Status.ERROR,
+                                        message: 'Some error occurred while updating the connection. Please try again later.',
                                     });
                                 });
                             }
