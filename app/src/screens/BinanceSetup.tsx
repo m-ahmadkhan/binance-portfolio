@@ -73,7 +73,7 @@ const BinanceSetup = () => {
                                 }).then(() => {
                                     setStatusData({
                                         status: Status.SUCCESS,
-                                        message: 'Connection successfully updated.',
+                                        message: 'Connection updated successfully.',
                                     });
                                 });
                             }
