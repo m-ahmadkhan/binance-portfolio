@@ -1,10 +1,15 @@
 import React from 'react';
 import { Text, TextInput, View, Button } from 'react-native';
 
+import { getKey, storeKey } from '../utils/encrypted_storage_utils';
+import StatusControl from '../components/StatusControl';
+import { Status, InitialStatus } from '../components/StatusControl/constants';
+import { EncryptedStorageKeys } from '../constants'
+
 const BinanceSetup = () => {
     const [apiKey, setApiKey] = React.useState('');
     const [apiSecret, setApiSecret] = React.useState('');
-    const [error, setError] = React.useState('');
+    const [statusData, setStatusData] = React.useState(InitialStatus);
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', marginHorizontal: 48 }}>
@@ -21,7 +26,7 @@ const BinanceSetup = () => {
                 <TextInput
                     style={{ borderWidth: 1, marginTop: 8, paddingHorizontal: 8 }}
                     onChangeText={(value) => {
-                        setError('');
+                        setStatusData(InitialStatus);
                         setApiKey(value);
                     }}
                     value={apiKey}
@@ -34,7 +39,7 @@ const BinanceSetup = () => {
                 <TextInput
                     style={{ borderWidth: 1, marginTop: 8, paddingHorizontal: 8 }}
                     onChangeText={(value) => {
-                        setError('');
+                        setStatusData(InitialStatus);
                         setApiSecret(value);
                     }}
                     value={apiSecret}
@@ -44,12 +49,19 @@ const BinanceSetup = () => {
                 />
 
                 <View style={{ marginTop: 16 }}>
-                    {!!error && <Text style={{ color: 'red', marginBottom: 8, fontSize: 12 }}>{error}</Text>}
+                    <StatusControl statusData={statusData} styles={{ marginBottom: 8 }} />
                     <Button
                         title='Update Connection'
-                        onPress={() => {
-                            if (!apiKey) setError('Please provide the API Key.')
-                            else if (!apiSecret) setError('Please provide the API Secret.')
+                        onPress={async () => {
+                            if (!apiKey) setStatusData({status: Status.ERROR, message: 'Please provide the API Key.'});
+                            else if (!apiSecret) setStatusData({status: Status.ERROR, message: 'Please provide the API Secret.'});
+                            else {
+                                await storeKey(EncryptedStorageKeys.BINANCE_API_KEY_OBJECT, {
+                                    [EncryptedStorageKeys.BINANCE_API_KEY]: apiKey,
+                                    [EncryptedStorageKeys.BINANCE_API_SECRET]: apiSecret,
+                                });
+                                setStatusData({status: Status.SUCCESS, message: 'Connection successfully updated.'});
+                            }
                         }}
                     />
                 </View>
