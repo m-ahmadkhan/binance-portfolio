@@ -1,5 +1,56 @@
 {
   "devDependencies": {
-    "prettier": "2.6.2"
+    "@typescript-eslint/eslint-plugin": "5.23.0",
+    "@typescript-eslint/parser": "5.23.0",
+    "eslint": "7.32.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-plugin-import": "2.25.3",
+    "eslint-plugin-jsx-a11y": "6.5.1",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-react": "7.28.0",
+    "eslint-plugin-react-hooks": "4.3.0",
+    "eslint-plugin-react-native": "4.0.0",
+    "prettier": "2.6.2",
+    "typescript": "4.6.4"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": [
+      "plugin:react/recommended",
+      "airbnb",
+      "airbnb/hooks",
+      "prettier",
+      "prettier/react"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "plugins": [
+      "react",
+      "react-native",
+      "@typescript-eslint"
+    ],
+    "rules": {}
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "jsxSingleQuote": true,
+    "singleQuote": true,
+    "quoteProps": "as-needed",
+    "semi": true,
+    "printWidth": 100,
+    "useTabs": false,
+    "tabWidth": 2,
+    "trailingComma": "all"
   }
 }
