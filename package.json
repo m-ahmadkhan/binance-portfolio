@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "typescript": "4.6.4",
     "@typescript-eslint/eslint-plugin": "5.23.0",
     "@typescript-eslint/parser": "5.23.0",
     "eslint": "7.32.0",
@@ -10,5 +11,43 @@
     "eslint-plugin-react-hooks": "4.3.0",
     "eslint-plugin-react-native": "4.0.0",
     "prettier": "2.6.2"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": [
+      "plugin:react/recommended",
+      "airbnb",
+      "airbnb/hooks"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "plugins": [
+      "react",
+      "react-native",
+      "@typescript-eslint"
+    ],
+    "rules": {}
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "jsxSingleQuote": true,
+    "singleQuote": true,
+    "quoteProps": "as-needed",
+    "semi": true,
+    "printWidth": 100,
+    "useTabs": false,
+    "tabWidth": 2,
+    "trailingComma": "all"
   }
 }
