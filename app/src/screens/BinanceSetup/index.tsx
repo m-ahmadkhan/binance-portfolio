@@ -5,7 +5,7 @@ import { getKey, storeKey } from 'utils/encryptedStorageUtils';
 import StatusControl from 'components/StatusControl';
 import { EncryptedStorageKeys, Status, InitialStatus } from 'constants/index';
 
-import { verifyAPIRestrictions } from 'actions/binanceActions';
+import { verifyAPIRestrictions, GetAPIRestrictionsResponse } from 'actions/binanceActions';
 
 const BinanceSetup = () => {
   const [apiKey, setApiKey] = React.useState('');
@@ -77,25 +77,54 @@ const BinanceSetup = () => {
               else if (!apiSecret)
                 setStatusData({ status: Status.ERROR, message: 'Please provide the API Secret.' });
               else {
+                setStatusData({
+                  status: Status.MESSAGE,
+                  message: 'Checking API Permissions...',
+                });
+
                 verifyAPIRestrictions(apiKey, apiSecret)
-                  .then(() =>
-                    storeKey(EncryptedStorageKeys.BINANCE_API_KEY_OBJECT, {
+                  .then((response: GetAPIRestrictionsResponse) => {
+                    if (!response.enableReading) {
+                      throw { message: 'You need to enable reading in the API.' };
+                    } else if (
+                      response.enableFutures ||
+                      response.enableInternalTransfer ||
+                      response.enableMargin ||
+                      response.enableSpotAndMarginTrading ||
+                      response.enableVanillaOptions ||
+                      response.enableWithdrawals ||
+                      response.permitsUniversalTransfer
+                    ) {
+                      throw {
+                        message:
+                          'Found more permissions than reading in the API. Please restrict the API to read-only.',
+                      };
+                    }
+
+                    return storeKey(EncryptedStorageKeys.BINANCE_API_KEY_OBJECT, {
                       [EncryptedStorageKeys.BINANCE_API_KEY]: apiKey,
                       [EncryptedStorageKeys.BINANCE_API_SECRET]: apiSecret,
-                    }),
-                  )
+                    });
+                  })
                   .then(() => {
                     setStatusData({
                       status: Status.SUCCESS,
                       message: 'Connection updated successfully.',
                     });
                   })
-                  .catch(() => {
-                    setStatusData({
-                      status: Status.ERROR,
-                      message:
-                        'Some error occurred while updating the connection. Please try again later.',
-                    });
+                  .catch((error) => {
+                    if (typeof error === 'object' && typeof error.message !== 'undefined') {
+                      setStatusData({
+                        status: Status.ERROR,
+                        message: error.message,
+                      });
+                    } else {
+                      setStatusData({
+                        status: Status.ERROR,
+                        message:
+                          'Some error occurred while updating the connection. Please try again later.',
+                      });
+                    }
                   });
               }
             }}
