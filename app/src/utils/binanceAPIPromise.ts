@@ -63,7 +63,7 @@ const binanceAPIPromise =
     });
 
     if (Math.floor(xhr.status / 200) === 1) {
-      return await xhr.text();
+      return await xhr.json();
     } else {
       throw await xhr.json();
     }

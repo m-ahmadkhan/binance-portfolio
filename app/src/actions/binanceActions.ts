@@ -14,11 +14,9 @@ export type GetAPIRestrictionsResponse = {
 };
 
 export const verifyAPIRestrictions = (apiKey: string, apiSecret: string) =>
-  binanceAPI
-    .get({
-      url: '/sapi/v1/account/apiRestrictions',
-      apiKey,
-      apiSecret,
-      headers: { 'Content-Type': 'application/json' },
-    })
-    .then(JSON.parse);
+  binanceAPI.get({
+    url: '/sapi/v1/account/apiRestrictions',
+    apiKey,
+    apiSecret,
+    headers: { 'Content-Type': 'application/json' },
+  });
