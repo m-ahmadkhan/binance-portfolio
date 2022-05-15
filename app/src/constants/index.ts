@@ -15,3 +15,8 @@ export const InitialStatus = {
   status: Status.INIT,
   message: '',
 };
+
+export const BinanceErrorCodes = {
+  UNAUTHORIZED: -1002,
+  INVALID_SIGNATURE: -1022,
+};
