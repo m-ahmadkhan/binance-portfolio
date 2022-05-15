@@ -1,5 +1,6 @@
 import queryString from 'query-string';
 import { JSHmac, CONSTANTS } from 'react-native-hash';
+import netInfo from '@react-native-community/netinfo';
 
 const binanceBaseRoute = 'https://api.binance.com';
 
@@ -23,6 +24,13 @@ const binanceAPIPromise =
     apiSecret: string;
     headers?: Object;
   }) => {
+    const networkInfo = await netInfo.fetch();
+    if (!networkInfo.isConnected || !networkInfo.isInternetReachable) {
+      throw {
+        message: 'No internet connection found.',
+      };
+    }
+
     url = url.startsWith('/') ? url.slice(1) : url;
     const headersObj = {
       ...headers,
