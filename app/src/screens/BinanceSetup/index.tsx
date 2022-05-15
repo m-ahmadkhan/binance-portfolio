@@ -5,6 +5,8 @@ import { getKey, storeKey } from 'utils/encryptedStorageUtils';
 import StatusControl from 'components/StatusControl';
 import { EncryptedStorageKeys, Status, InitialStatus } from 'constants/index';
 
+import { verifyAPIRestrictions } from 'actions/binanceActions';
+
 const BinanceSetup = () => {
   const [apiKey, setApiKey] = React.useState('');
   const [apiSecret, setApiSecret] = React.useState('');
@@ -75,10 +77,13 @@ const BinanceSetup = () => {
               else if (!apiSecret)
                 setStatusData({ status: Status.ERROR, message: 'Please provide the API Secret.' });
               else {
-                storeKey(EncryptedStorageKeys.BINANCE_API_KEY_OBJECT, {
-                  [EncryptedStorageKeys.BINANCE_API_KEY]: apiKey,
-                  [EncryptedStorageKeys.BINANCE_API_SECRET]: apiSecret,
-                })
+                verifyAPIRestrictions(apiKey, apiSecret)
+                  .then(() =>
+                    storeKey(EncryptedStorageKeys.BINANCE_API_KEY_OBJECT, {
+                      [EncryptedStorageKeys.BINANCE_API_KEY]: apiKey,
+                      [EncryptedStorageKeys.BINANCE_API_SECRET]: apiSecret,
+                    }),
+                  )
                   .then(() => {
                     setStatusData({
                       status: Status.SUCCESS,
