@@ -21,4 +21,4 @@ export const verifyAPIRestrictions = (apiKey: string, apiSecret: string) =>
       apiSecret,
       headers: { 'Content-Type': 'application/json' },
     })
-    .then((response: string) => JSON.parse(response));
+    .then(JSON.parse);
