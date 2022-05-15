@@ -3,7 +3,7 @@ import { Text, TextInput, View, Button } from 'react-native';
 
 import { getKey, storeKey } from 'utils/encryptedStorageUtils';
 import StatusControl from 'components/StatusControl';
-import { EncryptedStorageKeys, Status, InitialStatus } from 'constants/index';
+import { EncryptedStorageKeys, Status, InitialStatus, BinanceErrorCodes } from 'constants/index';
 
 import { verifyAPIRestrictions, GetAPIRestrictionsResponse } from 'actions/binanceActions';
 
@@ -117,6 +117,17 @@ const BinanceSetup = () => {
                       setStatusData({
                         status: Status.ERROR,
                         message: error.message,
+                      });
+                    } else if (
+                      typeof error === 'object' &&
+                      typeof error.code !== 'undefined' &&
+                      (error.code === BinanceErrorCodes.UNAUTHORIZED ||
+                        error.code === BinanceErrorCodes.INVALID_SIGNATURE)
+                    ) {
+                      setStatusData({
+                        status: Status.ERROR,
+                        message:
+                          'API Key or Secret seems to be invalid. Please verify that you entered the correct API Key and Secret.',
                       });
                     } else {
                       setStatusData({
